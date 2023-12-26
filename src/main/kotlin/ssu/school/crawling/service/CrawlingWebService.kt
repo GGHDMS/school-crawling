@@ -127,7 +127,6 @@ class CrawlingWebService(
                 }
             }
             jobs.add(job)
-            println(pageNumber)
         }
 
         coroutineScope.async {
