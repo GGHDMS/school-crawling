@@ -6,7 +6,8 @@ spring:
 
   jpa:
     defer-datasource-initialization: true
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create
+
 #    show-sql: true
     open-in-view: false
     properties:
