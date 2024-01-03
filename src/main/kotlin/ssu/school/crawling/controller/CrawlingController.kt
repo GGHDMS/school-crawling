@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import ssu.school.crawling.domain.funsysten.entity.FunSystem
 import ssu.school.crawling.domain.notice.entity.Notice
+import ssu.school.crawling.service.CrawlingElService
 import ssu.school.crawling.service.CrawlingWebService
 import ssu.school.crawling.service.SearchService
 
 @RestController
 class CrawlingController(
     private val crawlingWebService: CrawlingWebService,
+    private val crawlingElService: CrawlingElService,
     private val searchService: SearchService,
 ) {
 
@@ -33,6 +35,17 @@ class CrawlingController(
     suspend fun crawling(): ResponseEntity<String> {
         return try {
             crawlingWebService.crawlingNotice()
+            ResponseEntity.ok("Crawling started successfully.")
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Crawling failed: ${e.message}")
+        }
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/crawling/notices/el")
+    suspend fun crawlingEl(): ResponseEntity<String> {
+        return try {
+            crawlingElService.crawlingNoticeEl()
             ResponseEntity.ok("Crawling started successfully.")
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Crawling failed: ${e.message}")
