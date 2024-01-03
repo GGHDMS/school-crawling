@@ -26,6 +26,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jsoup:jsoup:1.17.1")
 
+    implementation ("org.springframework.data:spring-data-elasticsearch")
+
     // async
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
